@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
+import BookContainer from "./components/BookContainer";
+import BookDetails from "./components/BookDetails";
+import NewBookForm from "./components/NewBookForm";
+
 
 function App() {
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    fetch("/books")
+      .then((r) => r.json())
+      .then((data) => {setBooks(data); setLoading(false)});
+  }, []);
+
+  function handleNewBook(newBook) {
+    setBooks([...books, newBook])
+  }
+
+  // console.log(books)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/books" element={<BookContainer books={books} setBooks={setBooks} />} />
+          <Route path="/books/:id" element={<BookDetails books={books} loading={loading}/>} />
+          <Route path="/books/new" element={<NewBookForm onAddBook={handleNewBook} />} />
+        </Route>
+        
+      </Routes>
     </div>
   );
 }

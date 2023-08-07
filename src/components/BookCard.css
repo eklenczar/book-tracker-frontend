@@ -1,0 +1,13 @@
+.book-card {
+    border: solid;
+    border-width: thick;
+    padding: 10px;
+    margin: 20px;
+    background-color: darksalmon;
+    max-width: 460px;
+    min-width: 460px;
+    min-height: 220px;
+    float: left;
+   
+}
+
