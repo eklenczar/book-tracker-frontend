@@ -5,12 +5,9 @@ import "./BookCard.css";
 function BookCard({ book, onBookDelete }) {
   
   function handleDeleteClick() {
-  
     fetch(`/books/${book.id}`, {
       method: "DELETE",
-    })
-      
-      .then(() => onBookDelete(book));
+    }).then(() => onBookDelete(book));
   }
 
   return (
@@ -23,6 +20,7 @@ function BookCard({ book, onBookDelete }) {
       <p className="book-genre">{book.genre}</p>
       <div>
         <button onClick={handleDeleteClick}>Delete</button>
+        <button>Update</button>
       </div>
     </div>
   );

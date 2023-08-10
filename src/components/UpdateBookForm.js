@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NewBookForm({ onAddBook }) {
+function UpdateBookForm() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
@@ -8,16 +8,16 @@ function NewBookForm({ onAddBook }) {
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const handleTitle = (e) => setTitle(e.target.value);
-  const handleAuthor = (e) => setAuthor(e.target.value);
-  const handleGenre = (e) => setGenre(e.target.value);
-  const handleImage = (e) => setImage(e.target.value);
-  const handleDesc = (e) => setDescription(e.target.value);
+  const handleTitleUpdate = (e) => setTitle(e.target.value);
+  const handleAuthorUpdate = (e) => setAuthor(e.target.value);
+  const handleGenreUpdate = (e) => setGenre(e.target.value);
+  const handleImageUpdate = (e) => setImage(e.target.value);
+  const handleDescUpdate = (e) => setDescription(e.target.value);
 
-  function handleNewBookSubmit(e) {
+  function handleUpdateBookSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:3000/books", {
-      method: "POST",
+    fetch(`/books/${book.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -30,7 +30,7 @@ function NewBookForm({ onAddBook }) {
       }),
     }).then((response) => {
       if (response.ok) {
-        response.json().then((newBook) => onAddBook(newBook));
+        response.json().then((updatedBook) => updatedBook);
       } else {
         response.json().then((errorData) => setErrors(errorData.errors));
       }
@@ -42,25 +42,29 @@ function NewBookForm({ onAddBook }) {
       <form>
         <label>Title</label>
         <br />
-        <input name="title" value={title} onChange={handleTitle} />
+        <input name="title" value={title} onChange={handleTitleUpdate} />
         <br />
         <label>Author</label>
         <br />
-        <input name="author" value={author} onChange={handleAuthor} />
+        <input name="author" value={author} onChange={handleAuthorUpdate} />
         <br />
         <label>Genre</label>
         <br />
-        <input name="genre" value={genre} onChange={handleGenre} />
+        <input name="genre" value={genre} onChange={handleGenreUpdate} />
         <br />
         <label>Image</label>
         <br />
-        <input name="image" value={image} onChange={handleImage} />
+        <input name="image" value={image} onChange={handleImageUpdate} />
         <br />
         <label>Description</label>
         <br />
-        <input name="description" value={description} onChange={handleDesc} />
+        <input
+          name="description"
+          value={description}
+          onChange={handleDescUpdate}
+        />
         <br />
-        <button onClick={handleNewBookSubmit}>Submit</button>
+        <button onClick={handleUpdateBookSubmit}>Submit</button>
       </form>
       {errors.length > 0 && (
         <ul style={{ color: "red" }}>
@@ -73,4 +77,4 @@ function NewBookForm({ onAddBook }) {
   );
 }
 
-export default NewBookForm;
+export default UpdateBookForm;
