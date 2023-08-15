@@ -4,7 +4,7 @@ import ReviewContainer from "./ReviewContainer";
 import NewReviewForm from "./NewReviewForm";
 import "./BookDetails.css";
 
-function BookReviews({ books, loading }) {
+function BookDetails({ books, user, loading }) {
   const [showReview, setShowReview] = useState(true);
   const { id } = useParams();
   
@@ -31,12 +31,12 @@ function BookReviews({ books, loading }) {
               </button>
             </div>
           </div>
-          {!showReview && <NewReviewForm />}
-          {showReview && <ReviewContainer selectedBook={selectedBook} />}
+          {!showReview && <NewReviewForm user_id={user.id} book_id={selectedBook.id}/>}
+          {showReview && <ReviewContainer selectedBook={selectedBook} username={user.name} />}
         </div>
       )}
     </>
   );
 }
 
-export default BookReviews;
+export default BookDetails;

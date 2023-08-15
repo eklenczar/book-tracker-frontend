@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./UpdateBookForm.css";
 
 function UpdateBookForm() {
   const [title, setTitle] = useState("");
@@ -30,7 +31,7 @@ function UpdateBookForm() {
       }),
     }).then((response) => {
       if (response.ok) {
-        response.json().then((updatedBook) => updatedBook);
+        response.json().then((updatedBook) => onUpdate(updatedBook));
       } else {
         response.json().then((errorData) => setErrors(errorData.errors));
       }
@@ -38,34 +39,36 @@ function UpdateBookForm() {
   }
 
   return (
-    <div>
-      <form>
-        <label>Title</label>
-        <br />
-        <input name="title" value={title} onChange={handleTitleUpdate} />
-        <br />
-        <label>Author</label>
-        <br />
-        <input name="author" value={author} onChange={handleAuthorUpdate} />
-        <br />
-        <label>Genre</label>
-        <br />
-        <input name="genre" value={genre} onChange={handleGenreUpdate} />
-        <br />
-        <label>Image</label>
-        <br />
-        <input name="image" value={image} onChange={handleImageUpdate} />
-        <br />
-        <label>Description</label>
-        <br />
-        <input
-          name="description"
-          value={description}
-          onChange={handleDescUpdate}
-        />
-        <br />
-        <button onClick={handleUpdateBookSubmit}>Submit</button>
-      </form>
+    <div className="container">
+      <div className="center">
+        <form className="form">
+          <label>Title</label>
+          <br />
+          <input name="title" value={title} onChange={handleTitleUpdate} />
+          <br />
+          <label>Author</label>
+          <br />
+          <input name="author" value={author} onChange={handleAuthorUpdate} />
+          <br />
+          <label>Genre</label>
+          <br />
+          <input name="genre" value={genre} onChange={handleGenreUpdate} />
+          <br />
+          <label>Image</label>
+          <br />
+          <input name="image" value={image} onChange={handleImageUpdate} />
+          <br />
+          <label>Description</label>
+          <br />
+          <input
+            name="description"
+            value={description}
+            onChange={handleDescUpdate}
+          />
+          <br />
+          <button onClick={handleUpdateBookSubmit}>Submit</button>
+        </form>
+      </div>
       {errors.length > 0 && (
         <ul style={{ color: "red" }}>
           {errors.map((error) => (

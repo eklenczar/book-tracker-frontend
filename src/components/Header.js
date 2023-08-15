@@ -1,11 +1,11 @@
 import React from 'react'
-import "../App.css"
+import "./Header.css"
 
 function Header() {
 
     return (
 
-    <div id="header">
+    <div className="header">
         <h1>Book Tracker</h1>
     </div>
   )

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BookCard from "./BookCard";
 import "./BookContainer.css"
-// import NewBookForm from './NewBookForm';
+
 
 function BookContainer({ books, setBooks }) {
   
@@ -20,7 +20,7 @@ function BookContainer({ books, setBooks }) {
   const renderBooks = books.map(bookRenderer);
 
   return (
-  <div>
+  <div className="book-container">
     <Link to={"/books/new"} className="new-book-link">
       Add New Book
     </Link>
