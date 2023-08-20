@@ -39,7 +39,11 @@ function Login( {onLogin} ) {
           <label>Password</label>
           <br />
           <input name="password" value={password} onChange={handlePasswordChange}/>
+          <br />
+          <br />
+          <div className="login-button">
           <button onClick={handleUserSubmit}>Login</button>
+          </div>
         </form>
       </div>
       {/* {errors.length > 0 && (

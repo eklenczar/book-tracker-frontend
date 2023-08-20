@@ -8,6 +8,7 @@ import BookDetails from "./components/BookDetails";
 import NewBookForm from "./components/NewBookForm";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
+import { UserContext } from "./components/CurrentUserContext";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -27,10 +28,6 @@ function App() {
   function handleNewBook(newBook) {
     setBooks([...books, newBook]);
   }
-
-  // function handleUpdateBook(updatedBook) {
-
-  // }
 
   function handleNewUser(newUser) {
     setUsers([...users, newUser]);
@@ -52,11 +49,30 @@ function App() {
     setUser(null);
   }
 
+  function afterReviewAdd(review, bookId) {
+    const bookIdx = books.findIndex((book) => book.id === bookId)
+    const newBook = {...books[bookIdx], reviews:[...books[bookIdx].reviews, review]}
+    setBooks([...books.slice(0, bookIdx), newBook, ...books.slice(bookIdx + 1)])
+  }
+
+  function afterReviewUpdate(review, bookId) {
+    const bookIdx = books.findIndex((book) => book.id === bookId)
+    const reviewIdx = books[bookIdx].reviews.findIndex((_review) => _review.id === review.id)
+    const newBook = {...books[bookIdx], reviews:[...books[bookIdx].reviews.slice(0, reviewIdx), {...books[bookIdx].reviews[reviewIdx], ...review}, ...books[bookIdx].reviews.slice(reviewIdx + 1)]}
+    setBooks([...books.slice(0, bookIdx), newBook, ...books.slice(bookIdx + 1)])
+  }
+
+  function afterReviewDelete(review, bookId) {
+    const bookIdx = books.findIndex((book) => book.id === bookId)
+    setBooks([...books.slice(0, bookIdx), ...books.slice(bookIdx + 1)])
+  }
+
   return (
+    <UserContext.Provider value={user}>
     <div className="app">
       <Header />
       <Routes>
-        <Route path="/" element={<Layout user={user} onLogout={handleLogout} />}>
+        <Route path="/" element={<Layout onLogout={handleLogout} />}>
           <Route index element={<Home />} />
           <Route
             path="/books"
@@ -64,7 +80,7 @@ function App() {
           />
           <Route
             path="/books/:id"
-            element={<BookDetails books={books} user={user} loading={loading} />}
+            element={<BookDetails books={books} loading={loading} afterReviewAdd={afterReviewAdd}/>}
           />
           <Route
             path="/books/new"
@@ -78,6 +94,7 @@ function App() {
         </Route>
       </Routes>
     </div>
+    </UserContext.Provider>
   );
 }
 

@@ -20,7 +20,6 @@ function BookCard({ book, onBookDelete }) {
       <p className="book-genre">{book.genre}</p>
       <div>
         <button onClick={handleDeleteClick}>Delete</button>
-        <button>Update</button>
       </div>
     </div>
   );

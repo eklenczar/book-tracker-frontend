@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./NewReviewForm.css";
+import { UserContext } from "./CurrentUserContext";
 
-function NewReviewForm({ book_id, user_id }) {
+function NewReviewForm({ book_id, onReviewAdd }) {
+  const user = useContext(UserContext)
+
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
@@ -19,11 +22,11 @@ function NewReviewForm({ book_id, user_id }) {
         title: title,
         text: text,
         book_id: book_id,
-        user_id: user_id,
+        user_id: user?.id,
       }),
     })
       .then((r) => r.json())
-      .then((data) => console.log(data));
+      .then((data) => onReviewAdd(data));
   }
 
   return (

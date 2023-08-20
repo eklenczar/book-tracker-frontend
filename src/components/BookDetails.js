@@ -4,11 +4,16 @@ import ReviewContainer from "./ReviewContainer";
 import NewReviewForm from "./NewReviewForm";
 import "./BookDetails.css";
 
-function BookDetails({ books, user, loading }) {
+function BookDetails({ books, loading, afterReviewAdd }) {
   const [showReview, setShowReview] = useState(true);
   const { id } = useParams();
   
   const selectedBook = books.find((book) => book.id === parseInt(id));
+
+  function onReviewAdd(review) {
+    setShowReview(true)
+    afterReviewAdd(review, parseInt(id))
+  }
 
   return (
     <>
@@ -31,8 +36,8 @@ function BookDetails({ books, user, loading }) {
               </button>
             </div>
           </div>
-          {!showReview && <NewReviewForm user_id={user.id} book_id={selectedBook.id}/>}
-          {showReview && <ReviewContainer selectedBook={selectedBook} username={user.name} />}
+          {!showReview && <NewReviewForm  book_id={selectedBook.id} onReviewAdd={onReviewAdd} />}
+          {showReview && <ReviewContainer selectedBook={selectedBook} />}
         </div>
       )}
     </>

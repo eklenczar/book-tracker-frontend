@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
+import "./Layout.css"
+import { UserContext } from "./CurrentUserContext";
 
-function Layout({ user, onLogout }) {
-  
+function Layout({ onLogout }) {
+  const user = useContext(UserContext)
+
   function handleLogout() {
     fetch("/logout", {
       method: "DELETE",
@@ -10,8 +13,8 @@ function Layout({ user, onLogout }) {
   }
 
   return (
-    <div>
-      <nav>
+    <div className="layout">
+      <nav className="nav">
         <ul>
           <li>
             <Link to="/">Home</Link>
