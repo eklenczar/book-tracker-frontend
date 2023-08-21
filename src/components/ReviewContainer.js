@@ -4,9 +4,6 @@ import ReviewCard from './ReviewCard'
 
 function ReviewContainer( {selectedBook, user_id} ) {
 
-  // function handleReviewDelete(deletedReview) {
-
-  // }
   
   return (
     <>
