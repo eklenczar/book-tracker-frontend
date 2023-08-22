@@ -1,13 +1,4 @@
-
-.new-book-link {
-  border: 1px solid blue;
-  padding: 14px;
-  border-radius: 4px;
-  background-color: blue;
-  color: white;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
- 
+.new-book-button {
+  text-align: center;
+  padding-top: 20px;
 }
