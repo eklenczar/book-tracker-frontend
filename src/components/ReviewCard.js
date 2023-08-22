@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import "./ReviewCard.css";
 import { UserContext } from "./CurrentUserContext";
+import EditReviewModal from "./EditReviewModal";
+import Button from "react-bootstrap/Button";
 
 function ReviewCard({ review, book_id }) {
   const user = useContext(UserContext)
@@ -40,8 +42,8 @@ function ReviewCard({ review, book_id }) {
       <div>
         <p>{review.text}</p>
       </div>
-      <button onClick={handleEditClick}>Update</button>
-      <button onClick={handleDeleteClick}>Delete</button>
+      <EditReviewModal />
+      <Button onClick={handleDeleteClick}>Delete</Button>
     </div>
   );
 }
