@@ -3,9 +3,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-function EditReviewModal( {review, onUpdateReview} ) {
+function EditReviewModal({ review, onUpdateReview }) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [errors, setErrors] = useState([])
   const [show, setShow] = useState(false);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -13,23 +14,26 @@ function EditReviewModal( {review, onUpdateReview} ) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(review)
-
-    function handleEditClick(e) {
-      e.preventDefault();
-      fetch(`/reviews/${review.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: title,
-          text: text,
-        }),
-      })
-        .then((r) => r.json())
-        .then((updatedReview) => onUpdateReview(updatedReview));
-    }
+  function handleEditClick(e) {
+    e.preventDefault();
+    fetch(`/reviews/${review.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        text: text,
+      }),
+    })
+    .then((response) => {
+        if (response.ok) {
+          response.json().then((updatedReview) => onUpdateReview(updatedReview));
+        } else {
+          response.json().then((errorData) => setErrors(errorData.errors));
+        }
+      });
+  }
 
   return (
     <>
@@ -74,9 +78,13 @@ function EditReviewModal( {review, onUpdateReview} ) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleEditClick}>Save Changes</Button>
+          <Button variant="primary" onClick={handleEditClick}>
+            Save Changes
+          </Button>
+          
         </Modal.Footer>
       </Modal>
+      
     </>
   );
 }

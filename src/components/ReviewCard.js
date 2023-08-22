@@ -3,47 +3,36 @@ import "./ReviewCard.css";
 import { UserContext } from "./CurrentUserContext";
 import EditReviewModal from "./EditReviewModal";
 import Button from "react-bootstrap/Button";
+import { ButtonGroup } from "react-bootstrap";
 
-function ReviewCard({ review, book_id }) {
-  const user = useContext(UserContext)
-  
+function ReviewCard({ review }) {
+  const user = useContext(UserContext);
+
   function handleDeleteClick() {
     fetch(`/reviews/${review.id}`, {
       method: "DELETE",
     }).then(() => console.log(review));
   }
 
-  function handleEditClick(e) {
-    e.preventDefault();
-    fetch(`/reviews/${review.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: review.title,
-        text: review.text,
-        user_id: user?.id,
-        book_id: book_id
-      }),
-    })
-      .then((r) => r.json())
-      .then((updatedReview) => console.log(updatedReview));
-  }
+  function handleEditReview(updatedReview) {}
 
-  useEffect(() => {console.log(user?.id)}, [user?.id])
- 
+  useEffect(() => {
+    console.log(user?.id);
+  }, [user?.id]);
+
   return (
     <div className="review-card">
-        
       <div>
-        <h5>{review.title} by {review.user.name}</h5>
+        <h5>{review.title}</h5>
+        <p> by {review.user.name}</p>
       </div>
       <div>
         <p>{review.text}</p>
       </div>
-      <EditReviewModal />
-      <Button onClick={handleDeleteClick}>Delete</Button>
+      <ButtonGroup>
+        <EditReviewModal review={review} onUpdateReview={handleEditReview} />
+        <Button onClick={handleDeleteClick}>Delete</Button>
+      </ButtonGroup>
     </div>
   );
 }

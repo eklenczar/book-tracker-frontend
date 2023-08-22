@@ -3,6 +3,7 @@ import "./NewReviewForm.css";
 import { UserContext } from "./CurrentUserContext";
 
 function NewReviewForm({ book_id, onReviewAdd }) {
+  const [errors, setErrors] = useState([])
   const user = useContext(UserContext)
 
   const [title, setTitle] = useState("");
@@ -24,12 +25,18 @@ function NewReviewForm({ book_id, onReviewAdd }) {
         book_id: book_id,
         user_id: user?.id,
       }),
-    })
-      .then((r) => r.json())
-      .then((data) => onReviewAdd(data));
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((newReview) => onReviewAdd(newReview));
+      } else {
+        response.json().then((errorData) => setErrors(errorData.errors));
+      }
+    });
   }
+  
 
   return (
+    <>
     <div className="container">
       <form className="form">
         <label>Title</label>
@@ -43,6 +50,14 @@ function NewReviewForm({ book_id, onReviewAdd }) {
         <button onClick={handleNewReviewSubmit}>Submit</button>
       </form>
     </div>
+    <div>{errors.length > 0 && (
+        <ul style={{ color: "red" }}>
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}</div>
+    </>
   );
 }
 

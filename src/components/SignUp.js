@@ -33,6 +33,7 @@ function SignUp({ onAddUser }) {
   }
 
   return (
+    <>
     <div className="container">
       <div className="center">
         <form>
@@ -58,14 +59,18 @@ function SignUp({ onAddUser }) {
           </div>
         </form>
       </div>
-      {/* {errors.length > 0 && (
+    </div>
+    <div>
+      {errors.length > 0 && (
         <ul style={{ color: "red" }}>
           {errors.map((error) => (
             <li key={error}>{error}</li>
           ))}
         </ul>
-      )} */}
-    </div>
+      )}
+      </div>
+    </>
+    
   );
 }
 

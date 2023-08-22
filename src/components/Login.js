@@ -29,6 +29,7 @@ function Login( {onLogin} ) {
     });
   }
   return (
+    <>
     <div className="container">
       <div className="center">
         <form>
@@ -46,14 +47,17 @@ function Login( {onLogin} ) {
           </div>
         </form>
       </div>
-      {/* {errors.length > 0 && (
+      
+    </div>
+    <div>{errors.length > 0 && (
         <ul style={{ color: "red" }}>
           {errors.map((error) => (
             <li key={error}>{error}</li>
           ))}
         </ul>
-      )} */}
-    </div>
+      )}
+      </div>
+    </>
   );
 }
 
