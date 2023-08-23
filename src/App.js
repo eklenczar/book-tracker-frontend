@@ -9,6 +9,7 @@ import NewBookForm from "./components/NewBookForm";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import { UserContext } from "./components/CurrentUserContext";
+import EditReviewForm from "./components/EditReviewForm";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -33,6 +34,8 @@ function App() {
     setUsers([...users, newUser]);
   }
 
+  const reviews = books.map((book) => book.reviews).flat();
+
   useEffect(() => {
     fetch("/me").then((response) => {
       if (response.ok) {
@@ -49,37 +52,34 @@ function App() {
     setUser(null);
   }
 
-  function afterReviewAdd(review, bookId) {
-    const bookIdx = books.findIndex((book) => book.id === bookId);
-    const newBook = {
-      ...books[bookIdx],
-      reviews: [...books[bookIdx].reviews, review],
-    };
-    setBooks([
-      ...books.slice(0, bookIdx),
-      newBook,
-      ...books.slice(bookIdx + 1),
-    ]);
+  function afterReviewAdd(review) {
+    const updatedBooks = books.map((book) => {
+      if (book.id === review.book_id) {
+        // update the book,
+        // grab the reviews for the book,
+        const updatedReviews = [...book.reviews, review];
+        // add the review to those reviews,
+        // make a copy of the book object and return updated reviews
+        const updatedBook = { ...book, reviews: updatedReviews };
+        return updatedBook;
+      } else {
+        return book;
+      }
+    });
+    setBooks(updatedBooks);
   }
 
-  function afterReviewUpdate(review, bookId) {
-    const bookIdx = books.findIndex((book) => book.id === bookId);
-    const reviewIdx = books[bookIdx].reviews.findIndex(
-      (_review) => _review.id === review.id
-    );
-    const newBook = {
-      ...books[bookIdx],
-      reviews: [
-        ...books[bookIdx].reviews.slice(0, reviewIdx),
-        { ...books[bookIdx].reviews[reviewIdx], ...review },
-        ...books[bookIdx].reviews.slice(reviewIdx + 1),
-      ],
-    };
-    setBooks([
-      ...books.slice(0, bookIdx),
-      newBook,
-      ...books.slice(bookIdx + 1),
-    ]);
+  function afterReviewUpdate(updatedReview) {
+    const updatedBooks = books.map((book) => {
+      if (book.id === updatedReview.id) {
+        const updatedReviews = [...book.reviews, updatedReview];
+        const updatedBook = { ...book, reviews: updatedReviews };
+        return updatedBook;
+      } else {
+        return book;
+      }
+    });
+    setBooks(updatedBooks);
   }
 
   function afterReviewDelete(review, bookId) {
@@ -118,6 +118,15 @@ function App() {
               element={<SignUp onAddUser={handleNewUser} />}
             />
           </Route>
+          <Route
+            path="/reviews/:id/edit"
+            element={
+              <EditReviewForm
+                onUpdateReview={afterReviewUpdate}
+                reviews={reviews}
+              />
+            }
+          />
         </Routes>
       </div>
     </UserContext.Provider>

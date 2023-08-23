@@ -6,7 +6,7 @@ function Header() {
     return (
 
     <div className="header">
-        <h1>Book Tracker</h1>
+        <h1>Book Trackr</h1>
     </div>
   )
 }

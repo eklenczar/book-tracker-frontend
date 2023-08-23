@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import "./ReviewCard.css";
 import { UserContext } from "./CurrentUserContext";
-import EditReviewModal from "./EditReviewModal";
-import Button from "react-bootstrap/Button";
-import { ButtonGroup } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 
 function ReviewCard({ review }) {
   const user = useContext(UserContext);
@@ -14,12 +13,6 @@ function ReviewCard({ review }) {
     }).then(() => console.log(review));
   }
 
-  function handleEditReview(updatedReview) {}
-
-  useEffect(() => {
-    console.log(user?.id);
-  }, [user?.id]);
-
   return (
     <div className="review-card">
       <div>
@@ -29,10 +22,13 @@ function ReviewCard({ review }) {
       <div>
         <p>{review.text}</p>
       </div>
-      <ButtonGroup>
-        <EditReviewModal review={review} onUpdateReview={handleEditReview} />
-        <Button onClick={handleDeleteClick}>Delete</Button>
-      </ButtonGroup>
+      
+        <Link to={`/reviews/${review.id}/edit`}>
+          <button>Edit</button>
+        </Link>
+        <button onClick={handleDeleteClick}>Delete</button>
+
+      
     </div>
   );
 }
