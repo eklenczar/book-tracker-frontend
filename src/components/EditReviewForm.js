@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-
+import "./EditReviewForm.css"
 
 function EditReviewForm( {onUpdateReview, reviews} ) {
   
   const [errors, setErrors] = useState([]);
   const { id } = useParams();
-  console.log(reviews)
+//   console.log(reviews)
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleTextChange = (e) => setText(e.target.value);
@@ -39,8 +39,8 @@ function EditReviewForm( {onUpdateReview, reviews} ) {
 
   return (
     <>
-    <div>
-      <div>
+    <div className="container">
+      <div className="center">
         <form>
           <label>Title</label>
           <br />
@@ -51,18 +51,19 @@ function EditReviewForm( {onUpdateReview, reviews} ) {
           <input onChange={handleTextChange} value={text}/>
           <br />
           <br />
-          <button onClick={handleEditClick}>Submit</button>
-          
+          <div className="edit-review-button">
+          <button  onClick={handleEditClick}>Submit</button>
+          </div>
         </form>
       </div>
     </div>
-    <div>{errors.length > 0 && (
+    {/* <div>{errors.length > 0 && (
         <ul style={{ color: "red" }}>
           {errors.map((error) => (
             <li key={error}>{error}</li>
           ))}
         </ul>
-      )}</div>
+      )}</div> */}
     </>
   );
 }
