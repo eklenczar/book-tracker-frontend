@@ -1,71 +1,19 @@
-# Getting Started with Create React App
+Getting started with Book Trackr
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Frontend Link](https://github.com/eklenczar/book-tracker-frontend)
+[Backend Link](https://github.com/eklenczar/book-tracker-backend)
 
-## Available Scripts
+To get started with the frontend: Run npm install in the console. Run npm start in the console.
+To get started on the backend: Run bundle install in the console. Run rails s in the console.
 
-In the project directory, you can run:
+BookTrakr is an app that is used to keep track of the books a user reads and allows them to review those books for other users to see.
 
-### `npm start`
+Home Page - A landing page with information about what Book Trackr does. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Books Page - This page lists all the books users have entered. Clicking on the cover of the book takes you to a page with the books details and reviews.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Book Details Page - This page is accessed by clicking on the cover of a book on the Books Page. Here you can see more specific in formation about the selected book as well as reviews entered by the app's users. There is also a "New Review" button which takes you to the New Reviews page where you can input your review for the book. Edit and delete functions are available for specific reviews but can only be used by the author of said review.
 
-### `npm test`
+Sign Up Page - This page allows you to create your own account on the app by entering a username, email, and password.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# book-tracker-frontend
+Login Page - Here you can use you username and password to login and add books as well as manage reviews for your account.

@@ -39,7 +39,7 @@ function Login( {onLogin} ) {
           <br />
           <label>Password</label>
           <br />
-          <input name="password" value={password} onChange={handlePasswordChange}/>
+          <input type="password" name="password" value={password} onChange={handlePasswordChange}/>
           <br />
           <br />
           <div className="login-button">

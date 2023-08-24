@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SignUp.css"
+import "./SignUp.css";
 
 function SignUp({ onAddUser }) {
   const [name, setName] = useState("");
@@ -34,43 +34,43 @@ function SignUp({ onAddUser }) {
 
   return (
     <>
-    <div className="container">
-      <div className="center">
-        <form>
-          <label>Username</label>
-          <br />
-          <input name="username" value={name} onChange={handleNameChange} />
-          <br />
-          <label>Email</label>
-          <br />
-          <input name="email" value={email} onChange={handleEmailChange} />
-          <br />
-          <label>Password</label>
-          <br />
-          <input
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          <br />
-          <br />
-          <div className="signup-button">
-          <button onClick={handleNewUserSubmit}>Submit</button>
-          </div>
-        </form>
+      <div className="container">
+        <div className="center">
+          <form>
+            <label>Username</label>
+            <br />
+            <input name="username" value={name} onChange={handleNameChange} />
+            <br />
+            <label>Email</label>
+            <br />
+            <input name="email" value={email} onChange={handleEmailChange} />
+            <br />
+            <label>Password</label>
+            <br />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            <br />
+            <br />
+            <div className="signup-button">
+              <button onClick={handleNewUserSubmit}>Submit</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    <div>
-      {errors.length > 0 && (
-        <ul style={{ color: "red" }}>
-          {errors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-      )}
+      <div>
+        {errors.length > 0 && (
+          <ul style={{ color: "red" }}>
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </>
-    
   );
 }
 

@@ -4,9 +4,9 @@ import "./EditReviewForm.css"
 
 function EditReviewForm( {onUpdateReview, reviews} ) {
   
-  const [errors, setErrors] = useState([]);
+  
   const { id } = useParams();
-//   console.log(reviews)
+
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleTextChange = (e) => setText(e.target.value);
@@ -16,6 +16,8 @@ function EditReviewForm( {onUpdateReview, reviews} ) {
 
   const [title, setTitle] = useState(selectedReview.title);
   const [text, setText] = useState(selectedReview.text);
+  const [errors, setErrors] = useState([]);
+    console.log(errors)
 
   function handleEditClick(e) {
     e.preventDefault();
@@ -57,13 +59,13 @@ function EditReviewForm( {onUpdateReview, reviews} ) {
         </form>
       </div>
     </div>
-    {/* <div>{errors.length > 0 && (
+    <div>{errors.length > 0 && (
         <ul style={{ color: "red" }}>
           {errors.map((error) => (
             <li key={error}>{error}</li>
           ))}
         </ul>
-      )}</div> */}
+      )}</div>
     </>
   );
 }

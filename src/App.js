@@ -20,8 +20,8 @@ function App() {
   useEffect(() => {
     fetch("/books")
       .then((r) => r.json())
-      .then((data) => {
-        setBooks(data);
+      .then((books) => {
+        setBooks(books);
         setLoading(false);
       });
   }, []);
@@ -33,7 +33,7 @@ function App() {
   function handleNewUser(newUser) {
     setUsers([...users, newUser]);
   }
-
+  console.log(books)
   const reviews = books.map((book) => book.reviews).flat();
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function App() {
 
   function afterReviewUpdate(updatedReview) {
     const updatedBooks = books.map((book) => {
-      if (book.id === updatedReview.id) {
+      if (book.id === updatedReview.book_id) {
         const updatedReviews = [...book.reviews, updatedReview];
         const updatedBook = { ...book, reviews: updatedReviews };
         return updatedBook;
@@ -82,11 +82,19 @@ function App() {
     setBooks(updatedBooks);
   }
 
-  function afterReviewDelete(review, bookId) {
-    const bookIdx = books.findIndex((book) => book.id === bookId);
-    setBooks([...books.slice(0, bookIdx), ...books.slice(bookIdx + 1)]);
+  function afterReviewDelete(deletedReview) {
+    const updatedBooks = books.map((book) => {
+      if (book.id === deletedReview.book_id) {
+        const updatedReviews = book.reviews.filter((review) => review.id !== deletedReview.id)
+        const updatedBook = { ...book, reviews: updatedReviews}
+        return updatedBook
+      } else {
+        return book
+      }
+    })
+    setBooks(updatedBooks)
   }
-
+  
   return (
     <UserContext.Provider value={user}>
       <div className="app">
@@ -105,6 +113,7 @@ function App() {
                   books={books}
                   loading={loading}
                   afterReviewAdd={afterReviewAdd}
+                  onReviewDelete={afterReviewDelete}
                 />
               }
             />
