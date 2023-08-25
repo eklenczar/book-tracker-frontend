@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
-import "./Layout.css"
+import "./Layout.css";
 import { UserContext } from "./CurrentUserContext";
 
 function Layout({ onLogout }) {
-  const user = useContext(UserContext)
+  const user = useContext(UserContext);
 
   function handleLogout() {
     fetch("/logout", {
@@ -37,7 +37,6 @@ function Layout({ onLogout }) {
           </li>
         </ul>
       </nav>
-
       <Outlet />
     </div>
   );

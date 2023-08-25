@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function ReviewCard({ review, onReviewDelete }) {
   const user = useContext(UserContext);
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState([]);
 
   function handleDeleteClick() {
     fetch(`/reviews/${review.id}`, {

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./BookCard.css";
 
 function BookCard({ book, onBookDelete }) {
-  
   function handleDeleteClick() {
     fetch(`/books/${book.id}`, {
       method: "DELETE",

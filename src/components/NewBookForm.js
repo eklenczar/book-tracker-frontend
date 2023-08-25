@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./NewBookForm.css"
+import "./NewBookForm.css";
 
 function NewBookForm({ onAddBook }) {
   const [title, setTitle] = useState("");
@@ -69,7 +69,7 @@ function NewBookForm({ onAddBook }) {
             <br />
             <br />
             <div className="new-book-submit-button">
-            <button onClick={handleNewBookSubmit}>Submit</button>
+              <button onClick={handleNewBookSubmit}>Submit</button>
             </div>
           </form>
         </div>

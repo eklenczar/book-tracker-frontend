@@ -7,7 +7,7 @@ import "./BookDetails.css";
 function BookDetails({ books, loading, afterReviewAdd, onReviewDelete }) {
   const [showReview, setShowReview] = useState(true);
   const { id } = useParams();
-  
+
   const selectedBook = books.find((book) => book.id === parseInt(id));
 
   return (
@@ -31,8 +31,18 @@ function BookDetails({ books, loading, afterReviewAdd, onReviewDelete }) {
               </button>
             </div>
           </div>
-          {!showReview && <NewReviewForm  book_id={selectedBook.id} onReviewAdd={afterReviewAdd} />}
-          {showReview && <ReviewContainer selectedBook={selectedBook} onReviewDelete={onReviewDelete} />}
+          {!showReview && (
+            <NewReviewForm
+              book_id={selectedBook.id}
+              onReviewAdd={afterReviewAdd}
+            />
+          )}
+          {showReview && (
+            <ReviewContainer
+              selectedBook={selectedBook}
+              onReviewDelete={onReviewDelete}
+            />
+          )}
         </div>
       )}
     </>

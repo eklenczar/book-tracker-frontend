@@ -3,8 +3,8 @@ import "./NewReviewForm.css";
 import { UserContext } from "./CurrentUserContext";
 
 function NewReviewForm({ book_id, onReviewAdd }) {
-  const [errors, setErrors] = useState([])
-  const user = useContext(UserContext)
+  const [errors, setErrors] = useState([]);
+  const user = useContext(UserContext);
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -33,30 +33,32 @@ function NewReviewForm({ book_id, onReviewAdd }) {
       }
     });
   }
-  
 
   return (
     <>
-    <div className="container">
-      <form className="form">
-        <label>Title</label>
-
-        <input name="title" value={title} onChange={handleReviewTitleChange} />
-
-        <label>Text</label>
-
-        <input name="text" value={text} onChange={handleReviewTextChange} />
-        <br />
-        <button onClick={handleNewReviewSubmit}>Submit</button>
-      </form>
-    </div>
-    <div>{errors.length > 0 && (
-        <ul style={{ color: "red" }}>
-          {errors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-      )}</div>
+      <div className="container">
+        <form className="form">
+          <label>Title</label>
+          <input
+            name="title"
+            value={title}
+            onChange={handleReviewTitleChange}
+          />
+          <label>Text</label>
+          <input name="text" value={text} onChange={handleReviewTextChange} />
+          <br />
+          <button onClick={handleNewReviewSubmit}>Submit</button>
+        </form>
+      </div>
+      <div>
+        {errors.length > 0 && (
+          <ul style={{ color: "red" }}>
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 }
