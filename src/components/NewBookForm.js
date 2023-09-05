@@ -17,7 +17,7 @@ function NewBookForm({ onAddBook }) {
 
   function handleNewBookSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:3000/books", {
+    fetch("/books", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,6 +32,11 @@ function NewBookForm({ onAddBook }) {
     }).then((response) => {
       if (response.ok) {
         response.json().then((newBook) => onAddBook(newBook));
+        setTitle("")
+        setAuthor("")
+        setGenre("")
+        setImage("")
+        setDescription("")
       } else {
         response.json().then((errorData) => setErrors(errorData.errors));
       }

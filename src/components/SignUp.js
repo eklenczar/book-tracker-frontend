@@ -26,6 +26,9 @@ function SignUp({ onAddUser }) {
     }).then((response) => {
       if (response.ok) {
         response.json().then((newUser) => onAddUser(newUser));
+        setName("")
+        setEmail("")
+        setPassword("")
       } else {
         response.json().then((errorData) => setErrors(errorData.errors));
       }

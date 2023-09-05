@@ -29,6 +29,8 @@ function EditReviewForm({ onUpdateReview, reviews }) {
     }).then((response) => {
       if (response.ok) {
         response.json().then((updatedReview) => onUpdateReview(updatedReview));
+        setTitle("")
+        setText("")
       } else {
         response.json().then((errorData) => setErrors(errorData.errors));
       }

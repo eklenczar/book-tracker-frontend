@@ -23,6 +23,8 @@ function Login({ onLogin }) {
     }).then((response) => {
       if (response.ok) {
         response.json().then((user) => onLogin(user));
+        setUserName("")
+        setPassword("")
       } else {
         response.json().then((errorData) => setErrors(errorData.errors));
       }

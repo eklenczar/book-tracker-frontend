@@ -28,6 +28,8 @@ function NewReviewForm({ book_id, onReviewAdd }) {
     }).then((response) => {
       if (response.ok) {
         response.json().then((newReview) => onReviewAdd(newReview));
+        setTitle("")
+        setText("")
       } else {
         response.json().then((errorData) => setErrors(errorData.errors));
       }
