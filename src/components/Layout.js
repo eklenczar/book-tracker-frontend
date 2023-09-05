@@ -25,6 +25,7 @@ function Layout({ onLogout }) {
           <li>
             <Link to="/signup">Sign Up</Link>
           </li>
+          <li><Link to="/mybooks">My Books</Link></li>
           <li>
             {user ? (
               <div>

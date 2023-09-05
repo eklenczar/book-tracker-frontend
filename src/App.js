@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import { UserContext } from "./components/CurrentUserContext";
 import EditReviewForm from "./components/EditReviewForm";
+import MyBooks from "./components/MyBooks";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -33,7 +34,7 @@ function App() {
   function handleNewUser(newUser) {
     setUsers([...users, newUser]);
   }
-  console.log(books)
+
   const reviews = books.map((book) => book.reviews).flat();
 
   useEffect(() => {
@@ -55,11 +56,7 @@ function App() {
   function afterReviewAdd(review) {
     const updatedBooks = books.map((book) => {
       if (book.id === review.book_id) {
-        // update the book,
-        // grab the reviews for the book,
         const updatedReviews = [...book.reviews, review];
-        // add the review to those reviews,
-        // make a copy of the book object and return updated reviews
         const updatedBook = { ...book, reviews: updatedReviews };
         return updatedBook;
       } else {
@@ -67,12 +64,21 @@ function App() {
       }
     });
     setBooks(updatedBooks);
+    const foundBook = books.find((book) => book.id === review.book_id);
+    const updatedUser = { ...user, books: [...user.books, foundBook] };
+    setUser(updatedUser);
   }
 
   function afterReviewUpdate(updatedReview) {
     const updatedBooks = books.map((book) => {
       if (book.id === updatedReview.book_id) {
-        const updatedReviews = [...book.reviews, updatedReview];
+        const updatedReviews = book.reviews.map((review) => {
+          if (review.id === updatedReview.id) {
+            return updatedReview;
+          } else {
+            return review;
+          }
+        });
         const updatedBook = { ...book, reviews: updatedReviews };
         return updatedBook;
       } else {
@@ -85,16 +91,21 @@ function App() {
   function afterReviewDelete(deletedReview) {
     const updatedBooks = books.map((book) => {
       if (book.id === deletedReview.book_id) {
-        const updatedReviews = book.reviews.filter((review) => review.id !== deletedReview.id)
-        const updatedBook = { ...book, reviews: updatedReviews}
-        return updatedBook
+        const updatedReviews = book.reviews.filter(
+          (review) => review.id !== deletedReview.id
+        );
+        const updatedBook = { ...book, reviews: updatedReviews };
+        return updatedBook;
       } else {
-        return book
+        return book;
       }
-    })
-    setBooks(updatedBooks)
+    });
+    setBooks(updatedBooks);
+    const findDeletedBook = user.books.filter((book) => book.id !== deletedReview.book_id)
+    const updatedUser = {...user, books: findDeletedBook} 
+    setUser(updatedUser)
   }
-  
+
   return (
     <UserContext.Provider value={user}>
       <div className="app">
@@ -136,6 +147,7 @@ function App() {
               />
             }
           />
+          <Route path="/mybooks" element={<MyBooks user={user} />} />
         </Routes>
       </div>
     </UserContext.Provider>
