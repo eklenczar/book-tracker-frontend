@@ -4,7 +4,7 @@ Getting started with Book Trackr
 [Backend Link](https://github.com/eklenczar/book-tracker-backend)
 
 To get started with the frontend: Run npm install in the console. Run npm start in the console.
-To get started on the backend: Run bundle install in the console. Run rails s in the console.
+To get started on the backend: Run bundle install in the console.  Run rails s in the console.
 
 BookTrakr is an app that is used to keep track of the books a user reads and allows them to review those books for other users to see.
 
